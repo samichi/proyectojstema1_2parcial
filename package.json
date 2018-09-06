@@ -1,0 +1,36 @@
+{
+  "name": "proyectojstema1_2parcial",
+  "version": "1.0.0",
+  "description": "Proyecto del primer parcial usando el framework MEAN stack",
+  "engines": {
+    "node": "8.11.3"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samichi/proyectojstema1_2parcial.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "handlebars"
+  ],
+  "author": "Maria Baque, Isabel Leon, Jenniffer Trelles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samichi/proyectojstema1_2parcial/issues"
+  }
+}
