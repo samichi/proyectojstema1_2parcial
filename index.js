@@ -33,7 +33,7 @@ app.get('/listausuarios', (req, res, next)=>{
         return console.error('error al ejecutar query', err);
       }
       usuarioJuego.end();
-      return res.json(result.rows);
+      return res.json(result);
     });
   });
 });
