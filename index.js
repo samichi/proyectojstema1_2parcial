@@ -58,7 +58,59 @@ app.get('/loginadmin', (req, res) => res.render('loginadmin'));
 
 app.get('/menuprincipal', (req, res) => res.render('menuprincipal'));
 
-app.get('/agregarexcursion', (req, res) => res.render('agregarexcursion'));
+//app.get('/agregarexcursion', (req, res) => res.render('agregarexcursion'));
+
+app.post('/agregarexcursion', (req, res) => {
+  var client = new pg.Client(conString);
+  client.connect(function(err) {
+      if(err) {
+          return console.error('No es posible conectarse con el servidor', err);
+          return res.status(500).json({success: false, data: err});
+      }
+      client.query("INSERT INTO  excursion  (nombre ,  urlimg) VALUES ('"+req.body.nombre+"', '"+req.body.urlimg+"');", function(err, result) {
+          if(err) {
+              return console.error('Error al ejecutar el query', err);
+          }
+          client.end();
+          return res.json(result);
+      }); 
+  });
+});
+
+app.post('/agregarexcursion', (req, res) => {
+  var client = new pg.Client(conString);
+  client.connect(function(err) {
+      if(err) {
+          return console.error('No es posible conectarse con el servidor', err);
+          return res.status(500).json({success: false, data: err});
+      }
+      client.query("INSERT INTO  excursion  (nombre ,  urlimg) VALUES ('"+req.body.nombre+"', '"+req.body.urlimg+"');", function(err, result) {
+          if(err) {
+              return console.error('Error al ejecutar el query', err);
+          }
+          client.end();
+          return res.json(result);
+      }); 
+  });
+});
+
+app.post('/eliminarexcursionid', (req, res, next) => {
+  var client = new pg.Client(conString);
+  client.connect(function(err) {
+      if(err) {
+          return console.error('No es posible conectarse con el servidor', err);
+          return res.status(500).json({success: false, data: err});
+      }
+     
+      client.query("DELETE FROM excursion WHERE id="+ req.body.id +";", function(err, result) {
+          if(err) {
+              return console.error('Error al ejecutar el query', err);
+          }
+          client.end();
+          return res.json(result.rows);
+      });  
+  });
+});
 
 //var fortune=require('./lib/fortune.js');
 
