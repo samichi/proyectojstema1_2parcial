@@ -21,7 +21,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 
 app.set('view engine', 'handlebars');
 
-/*
+
 app.get('/listausuarios', (req, res, next)=>{
   var usuarioJuego = new pg.Client(conString);
   usuarioJuego.connect(function(err){
@@ -36,15 +36,15 @@ app.get('/listausuarios', (req, res, next)=>{
       }
       usuarioJuego.end();
       console.log(result);
-      //return res.json(result.rows);
+      return res.json(result.rows);
     });
   });
 });
-*/
+
 
 app.get('/', (req, res) => res.render('home'));
 
-app.get('/listausuarios', (req, res)=> res.render('listausuarios'));
+//app.get('/listausuarios', (req, res)=> res.render('listausuarios'));
 
 app.get('/excursiones', (req, res) => res.render('excursiones'));
 
