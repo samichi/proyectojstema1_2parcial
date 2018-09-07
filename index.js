@@ -1,3 +1,4 @@
+
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
@@ -20,6 +21,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 
 app.set('view engine', 'handlebars');
 
+/*
 app.get('/listausuarios', (req, res, next)=>{
   var usuarioJuego = new pg.Client(conString);
   usuarioJuego.connect(function(err){
@@ -34,14 +36,21 @@ app.get('/listausuarios', (req, res, next)=>{
       }
       usuarioJuego.end();
       console.log(result);
-      return res.json(result.rows);
+      //return res.json(result.rows);
     });
   });
 });
+*/
 
 app.get('/', (req, res) => res.render('home'));
 
+app.get('/listausuarios', (req, res)=> res.render('listausuarios'));
+
 app.get('/excursiones', (req, res) => res.render('excursiones'));
+
+app.get('/capitulo', (req, res)=> res.render('capitulo'));
+
+app.get('/actividad', (req, res)=> res.render('actividad'));
 
 app.get('/listaexcursiones', (req, res) => res.render('listaexcursiones'));
 
@@ -49,8 +58,42 @@ app.get('/loginadmin', (req, res) => res.render('loginadmin'));
 
 app.get('/menuprincipal', (req, res) => res.render('menuprincipal'));
 
+app.get('/agregarexcursion', (req, res) => res.render('agregarexcursion'));
+
 //var fortune=require('./lib/fortune.js');
 
 //app.get('/about', (req, res) => res.render('about', {fortune: fortune.getFortune()}));
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+
+/*
+const express = require('express');
+const path = require('path');
+const PORT = process.env.PORT || 5000;
+
+var exphbs  = require('express-handlebars');
+const knex = require('./db/knex');
+var app = express();
+
+//body parser
+var bodyParser = require('body-parser');
+var fortune = require('./lib/fortune.js');
+
+
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+
+
+app.use(bodyParser.urlencoded({extended : true}));
+
+app.post('/process', function (req, res){
+	console.log('formulario:' + req.query.form);
+	console.log('nombre:' + req.body.name);
+	console.log('email:' + req.body.email);
+	
+	
+});
+*/

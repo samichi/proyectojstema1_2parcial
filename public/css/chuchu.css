@@ -17,3 +17,7 @@
   width:100% !important;
   border-radius:0 0 5px 5px !important;
 }
+
+.rounded-button{
+  border-radius: 50%;
+}
