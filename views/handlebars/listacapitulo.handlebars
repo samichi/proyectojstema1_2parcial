@@ -3,19 +3,31 @@
 </div>
 <div class="row">
   <div class="col-lg-12 col-xs-12 col-md-12">
-    <h1>Lista de Excursiones</h1>
-		<br><a class="btn btn-success" href="" role"button">Agregar Excursion</a><br><br>
+    <h1>Lista de Capitulos</h1>
+			<br><a class="btn btn-success" href="" role"button">Agregar Capitulo</a><br><br>
     	<table class="table">
         <thead>
+            
           <tr>
-        	  <th>Nombre de la Excursion</th>
+        	<th>Titulo del Capitulo</th>
             <th>Imagen</th>
+			<th>Descripcion</th>
+			<th>Creditos</th>
+			<th>Video</th>
+			<th>Actividad</th>
+			<th>Respuesta</th>
             <th>Editar</th>
             <th>Eliminar</th>
           </tr>
         </thead>
 	    <tbody>
-	      <tr>
+          {{#each capList}}
+	        <tr>
+			  <td></td>
+			  <td><img class="rounded float-left" alt="imagen aqui"></td>
+					<td></td>
+					<td></td>
+					<td><a href="">Ver Video</a></td>
 					<td></td>
 					<td><img class="rounded float-left" alt="imagen aqui"></td>
           <td><a class="btn btn-primary" href="" role"button">Editar</a></td>
@@ -26,4 +38,6 @@
   </div>
 </div>
 
-
+{{#each objUsers}}
+<h2> {{nombre}}</h2>
+{{/each}}
