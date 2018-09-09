@@ -1,0 +1,15 @@
+html
+    head
+        title="ChuChu TV Game"
+        link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+    body
+        div.container
+        h1='Lista de Excursiones'
+        div.row
+            for excursion in excursionList
+                div.col-lg-2.col-xs-12.col-md-6
+                    a(class="btn btn-success", href="/listacapituloporexcursion", role="button", action="/listacapituloporexcursion", method="POST")
+                        img(class="img-thumbnail", src=excursion.urlimg, alt="", width="200px")
+                        h3=excursion.nombre
+                
+                    

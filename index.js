@@ -27,6 +27,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.set('view engine', 'pug');
 
+app.get('/', (req, res) => res.render('home'));
+
 /*
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -374,7 +376,7 @@ app.get('/leerimagen', (req, res, next)=>{
 
 //************************************** INFANTE **************************************//
 
-app.get('/leerinfante', (req, res, next)=>{
+app.get('/listainfante', (req, res, next)=>{
     var infanteList = [];
     var usuarioJuego = new pg.Client(conString);
     usuarioJuego.connect(function(err){
@@ -408,8 +410,10 @@ app.get('/leerinfante', (req, res, next)=>{
   });
 
   app.get('/leerexcursionusuario', (req, res, next)=>{
-    id_infante_jugando = req.bodyParser.id;
-    console.log(id_infante_jugando);
+    var id_infante_jugando = parseInt(req.body.id);
+    var puntaje_infante_jugando = parseInt(req.body.puntaje);
+    console.log('id_infante_jugando = '+id_infante_jugando);
+    console.log('puntaje_infante_jugando = '+puntaje_infante_jugando);
     var excursionList = [];
     var usuarioJuego = new pg.Client(conString);
     usuarioJuego.connect(function(err){
@@ -418,13 +422,14 @@ app.get('/leerinfante', (req, res, next)=>{
         return res.status(500).json({
           success: false, data: err});
       }
-      usuarioJuego.query('SELECT * FROM excursion;', function(err, result){
+      usuarioJuego.query('SELECT * FROM Excursion;', function(err, result){
         if(err){
-          return console.error('error al ejecutar query', err);
+          return console.error('Error al ejecutar query', err);
         }else{
           for (var i = 0; i < result.rows.length; i++) {
             console.log(result);
                     var excursion = {
+                        'id':result.rows[i].id,
                         'nombre':result.rows[i].nombre,
                         'urlimg':result.rows[i].urlimg
                     }
@@ -435,67 +440,48 @@ app.get('/leerinfante', (req, res, next)=>{
         usuarioJuego.end();
         //console.log(result);
         //return res.json(result.rows);
-        res.render('listaexcursion', {"excursionList": excursionList});
+        res.render('leerexcursionusuario', {"excursionList": excursionList});
       });
     });
   });
 
-  
-  app.post('/agregarinfante', (req, res, next) => {
-    var client = new pg.Client(conString);
-    client.connect(function(err) {
-        if(err) {
-            return console.error('No es posible conectarse con el servidor', err);
-            return res.status(500).json({success: false, data: err});
-        }
-        client.query("INSERT INTO  infante  (nombre ,  urlimagen, puntaje) VALUES ('"+req.body.nombre+"', '"+req.body.urlimagen+"', '"+req.body.puntaje+"');", function(err, result) {
-            if(err) {
-                return console.error('Error al ejecutar el query', err);
+  app.post('/listacapituloporexcursion', (req, res, next)=>{
+    var capExcList = [];
+    var usuarioJuego = new pg.Client(conString);
+    usuarioJuego.connect(function(err){
+      if(err){
+        return console.error('No se pudo conectar al servidor');
+        return res.status(500).json({
+          success: false, data: err});
+      }
+      usuarioJuego.query('SELECT * FROM capitulo WHERE id_excursion='+req.body.id+';', function(err, result){
+        var capitulo;
+        if(err){
+          return console.error('Error al ejecutar query', err);
+        } else{
+          for (var i = 0; i < result.rows.length; i++) {
+            console.log(result);
+            var capExc = {
+              'titulo':result.rows[i].titulo,
+              'imgcapitulo':result.rows[i].imgcapitulo,
+              'descripcion':result.rows[i].descripcion,
+              'creditos':result.rows[i].creditos,
+              'urlvideo':result.rows[i].urlvideo,
+              'urlactividad':result.rows[i].urlactividad,
+              'urlrespuesta':result.rows[i].urlrespuesta,
+              'id_excursion':result.rows[i].id_excursion
             }
-            client.end();
-            return res.json(result);
-        }); 
-    });
-  });
-  
-  app.delete('/eliminarinfanteid', (req, res, next) => {
-    var client = new pg.Client(conString);
-    client.connect(function(err) {
-        if(err) {
-            return console.error('No es posible conectarse con el servidor', err);
-            return res.status(500).json({success: false, data: err});
+            // Add object into array
+            capExcList.push(capExc);
+          }
         }
-       
-        client.query("DELETE FROM infante WHERE id="+ req.body.id +";", function(err, result) {
-            if(err) {
-                return console.error('Error al ejecutar el query', err);
-            }
-            client.end();
-            return res.json(result.rows);
-        });  
+        usuarioJuego.end();
+        //console.log(capList);
+        //console.log(result);
+        //return res.json(result.rows);
+        res.render('listacapituloporexcursion', {"capList": capExcList});
+      });
     });
-  });
-  
-  app.put('/actualizarinfante',(req,res)=>{
-    var client = new pg.Client(conString);
-   
-    client.connect(function(err) {
-       if(err) {
-           return console.error('No es posible conectarse con el servidor', err);
-           return res.status(500).json({success: false, data: err});
-       }
-  
-       client.query("UPDATE infante SET nombre ='"+req.body.nombre+"', urlimagen='"+req.body.urlimagen+"', puntaje='"+req.body.puntaje+"' WHERE id='" + req.body.id + "';", function(err, result) {
-           
-           if(err) {
-               return console.error('Error al ejecutar el query', err);
-           }
-           
-           //console.log(result);
-            client.end();
-           return res.json(result);
-       });
-   });
   });
 
 ///////////////////////////////////REST API////////////////////////////////////////////

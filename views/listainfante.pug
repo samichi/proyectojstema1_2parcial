@@ -5,12 +5,12 @@ html
     body
         div.container
         h1='Elije tu personaje'
-        div.row
-            for infante in infanteList
-                div.col-lg-2.col-xs-12.col-md-6
-                    a(class="btn btn-success", href="", role="button", method='')
-                        img(class="img-thumbnail", src=infante.urlimagen, alt="")
-                        h3=infante.nombre
+            div.row
+                for infante in infanteList
+                    div.col-lg-2.col-xs-12.col-md-6
+                        a(class="btn btn-success", href="/leerexcursionusuario", role="button", action="/leerexcursionusuario", method="GET")
+                            img(class="img-thumbnail", src=infante.urlimagen, alt="")
+                            h3=infante.nombre
             
 
 
