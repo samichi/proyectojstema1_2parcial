@@ -20,8 +20,9 @@ app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/proyecto';
 var conString = "postgres://xpbzhtflffydyb:52508071ffd004d8f9dca6855d0492dfa70ccebf8bee3e6efe311395861bde18@ec2-107-21-233-72.compute-1.amazonaws.com:5432/d22fba2ecbqfdm";
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -445,16 +446,17 @@ app.get('/listainfante', (req, res, next)=>{
     });
   });
 
-  app.post('/listacapituloporexcursion', (req, res, next)=>{
+  app.get('/listacapituloporexcursion', (req, res, next)=>{
     var capExcList = [];
     var usuarioJuego = new pg.Client(conString);
+    console.log("id_excursion"+req.body.id);
     usuarioJuego.connect(function(err){
       if(err){
         return console.error('No se pudo conectar al servidor');
         return res.status(500).json({
           success: false, data: err});
       }
-      usuarioJuego.query('SELECT * FROM capitulo WHERE id_excursion='+req.body.id+';', function(err, result){
+      usuarioJuego.query('SELECT * FROM capitulo;', function(err, result){
         var capitulo;
         if(err){
           return console.error('Error al ejecutar query', err);
