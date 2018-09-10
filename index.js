@@ -410,11 +410,12 @@ app.get('/listainfante', (req, res, next)=>{
     });
   });
 
-  app.get('/leerexcursionusuario', (req, res, next)=>{
-    var id_infante_jugando = parseInt(req.body.id);
-    var puntaje_infante_jugando = parseInt(req.body.puntaje);
+  app.get('/leerexcursionusuario/:id', (req, res, next)=>{
+    id_infante_jugando = req.params.id;
+    //var id_infante_jugando = parseInt(req.param.id);
+    //var puntaje_infante_jugando = parseInt(req.param.puntaje);
     console.log('id_infante_jugando = '+id_infante_jugando);
-    console.log('puntaje_infante_jugando = '+puntaje_infante_jugando);
+    //console.log('puntaje_infante_jugando = '+puntaje_infante_jugando);
     var excursionList = [];
     var usuarioJuego = new pg.Client(conString);
     usuarioJuego.connect(function(err){
@@ -446,17 +447,18 @@ app.get('/listainfante', (req, res, next)=>{
     });
   });
 
-  app.get('/listacapituloporexcursion', (req, res, next)=>{
+  app.get('/listacapituloporexcursion/:id', (req, res, next)=>{
     var capExcList = [];
+    var id_excursion = req.params.id;
     var usuarioJuego = new pg.Client(conString);
-    console.log("id_excursion"+req.body.id);
+    console.log("id_excursion"+req.params.id);
     usuarioJuego.connect(function(err){
       if(err){
         return console.error('No se pudo conectar al servidor');
         return res.status(500).json({
           success: false, data: err});
       }
-      usuarioJuego.query('SELECT * FROM capitulo;', function(err, result){
+      usuarioJuego.query('SELECT * FROM capitulo WHERE id_excursion='+req.params.id+';', function(err, result){
         var capitulo;
         if(err){
           return console.error('Error al ejecutar query', err);
@@ -481,7 +483,7 @@ app.get('/listainfante', (req, res, next)=>{
         //console.log(capList);
         //console.log(result);
         //return res.json(result.rows);
-        res.render('listacapituloporexcursion', {"capList": capExcList});
+        res.render('listacapituloporexcursion', {"capExcList": capExcList});
       });
     });
   });
