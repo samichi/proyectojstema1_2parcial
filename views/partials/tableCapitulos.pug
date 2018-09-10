@@ -1,0 +1,102 @@
+button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addCapitulo") AGREGAR CAPITULO
+table
+        tr  
+            th Titulo
+            th imgcapitulo
+            th descripcion
+            th creditos
+            th urlvideo
+            th urlactividad
+            th urlrespuesta
+        for object in objectList
+            tr
+                td= object.titulo
+                td= object.imgcapitulo
+                td= object.descripcion
+                td= object.creditos
+                td= object.urlvideo
+                td= object.urlactividad
+                td= object.urlrespuesta
+                td
+                    button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editCapitulo-"+object.id) EDITAR
+                td
+                    button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteCapitulo-"+object.id) ELIMINAR
+for object in objectList
+    div(class="modal fade" id="deleteCapitulo-"+object.id role="dialog")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal")
+                    h4(class="modal-title") Eliminar Excursion
+                div(class="modal-body")
+                    p ESTO ELIMINARÁ EL CAPITULO ENTERO
+                div(class="modal-footer")
+                    button(onclick="deleteOne('capitulo', '" + object.id + "')") ELIMINAR
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+div(class="modal fade" id="addCapitulo" role="dialog")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                button(type="button" class="close" data-dismiss="modal")
+                h4(class="modal-title") Agregar Excursion
+            div(class="modal-body")
+                form(method='POST' action='/capitulo/'+id_excursion)
+                    div.form-group
+                        label(for='titulo') Titulo
+                        input#titulo.form-control(type='text', placeholder='Titulo' name='titulo')
+                    div.form-group
+                        label(for='imgcapitulo') Imagen:
+                        input#imgcapitulo.form-control(type='text', placeholder='/example.com' name='imgcapitulo')
+                    div.form-group
+                        label(for='descripcion') Descripcion:
+                        input#descripcion.form-control(type='text', placeholder='Descripcion' name='descripcion')
+                    div.form-group
+                        label(for='creditos') Creditos:
+                        input#creditos.form-control(type='text', placeholder='Creditos' name='creditos')
+                    div.form-group
+                        label(for='urlvideo') Url Video:
+                        input#urlvideo.form-control(type='text', placeholder='/example.com' name='urlvideo')
+                    div.form-group
+                        label(for='urlactividad') Url Actividad:
+                        input#urlactividad.form-control(type='text', placeholder='/example.com' name='urlactividad')
+                    div.form-group
+                        label(for='urlrespuesta') Url Respuesta:
+                        input#urlrespuesta.form-control(type='text', placeholder='/example.com' name='urlrespuesta')
+                    button.btn.btn-primary(type='submit') Agregar
+            div(class="modal-footer")
+                button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+for object in objectList
+    div(class="modal fade" id="editCapitulo-"+object.id role="dialog")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal")
+                    h4(class="modal-title") Agregar Excursion
+                div(class="modal-body")
+                    form(method='POST' action='/capitulo/'+object.id_excursion+'/'+object.id)
+                        div.form-group
+                            label(for='titulo') Titulo
+                            input#titulo.form-control(type='text', placeholder='Titulo' name='titulo')
+                        div.form-group
+                            label(for='imgcapitulo') Imagen:
+                            input#imgcapitulo.form-control(type='text', placeholder='/example.com' name='imgcapitulo')
+                        div.form-group
+                            label(for='descripcion') Descripcion:
+                            input#descripcion.form-control(type='text', placeholder='Descripcion' name='descripcion')
+                        div.form-group
+                            label(for='creditos') Creditos:
+                            input#creditos.form-control(type='text', placeholder='Creditos' name='creditos')
+                        div.form-group
+                            label(for='urlvideo') Url Video:
+                            input#urlvideo.form-control(type='text', placeholder='/example.com' name='urlvideo')
+                        div.form-group
+                            label(for='urlactividad') Url Actividad:
+                            input#urlactividad.form-control(type='text', placeholder='/example.com' name='urlactividad')
+                        div.form-group
+                            label(for='urlrespuesta') Url Respuesta:
+                            input#urlrespuesta.form-control(type='text', placeholder='/example.com' name='urlrespuesta')
+                        button.btn.btn-primary(type='submit') Agregar
+                        a(href="/capitulos/"+ object.id+"/imagen") Ver imagenes
+                        a(href="/capitulos/"+ object.id+"/respuesta") Ver respuestas
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar

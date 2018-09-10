@@ -1,0 +1,16 @@
+include partials/header
+.container-fluid
+	.container(style="min-height:10em;")
+		p account					
+			if excursion
+				include partials/tableExcursiones
+			else if capitulo
+				include partials/tableCapitulos
+			else if imagen
+				include partials/tableImagen
+			else if respuesta
+				include partials/tableRespuesta
+			else if infante
+				include partials/tableInfante
+br
+include partials/footer

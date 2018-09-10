@@ -1,0 +1,56 @@
+button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addImagen") AGREGAR IMAGEN
+table
+        tr  
+            th ID
+            th Url Imagen
+            th Id capitulo
+        for object in objectList
+            tr
+                td= object.id
+                td= object.urlimagen
+                td= object.id_capitulo
+                td
+                    button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editImagen-"+object.id) EDITAR
+                td
+                    button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteImagen-"+object.id) ELIMINAR
+for object in objectList
+    div(class="modal fade" id="deleteImagen-"+object.id role="dialog")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal")
+                    h4(class="modal-title") Eliminar Excursion
+                div(class="modal-body")
+                    p ESTO ELIMINARÁ LA IMAGEN
+                div(class="modal-footer")
+                    button(onclick="deleteOne('imagen', '" + object.id + "')") ELIMINAR
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+div(class="modal fade" id="addImagen" role="dialog")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                button(type="button" class="close" data-dismiss="modal")
+                h4(class="modal-title") Agregar Imagen
+            div(class="modal-body")
+                form(method='POST' action='/imagen/'+ id_capitulo)
+                    div.form-group
+                        label(for='urlimagen') Url Imagen
+                        input#urlimagen.form-control(type='text', placeholder='Url de la imagen' name='urlimagen')
+                    button.btn.btn-primary(type='submit') Agregar
+            div(class="modal-footer")
+                button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+for object in objectList
+    div(class="modal fade" id="editImagen-"+object.id role="dialog")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal")
+                    h4(class="modal-title") Editar imagen
+                div(class="modal-body")
+                    form(method='POST' action='/imagen/'+object.id_capitulo+"/"+object.id)
+                        div.form-group
+                            label(for='urlimagen') URL Imagen
+                            input#urlimagen.form-control(type='text', placeholder='/example.com' value=object.urlimagen name='urlimagen')
+                        button.btn.btn-primary(type='submit') Actualizar
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar

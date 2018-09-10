@@ -1,0 +1,42 @@
+html
+    head
+        title="ChuChu TV Game"
+        link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+    body
+        div.container
+            div.row
+                div.col-lg-12.col-md-6.col-xs-12
+                    h1=capituloInfo.titulo
+                div.col-lg-12.col-xs-12.col-md-12
+                div.embed-responsive.embed-responsive-16by9
+                    iframe(class="embed-responsive-item", src=capituloInfo.urlvideo, allowfullscreen)
+            
+            div.row
+                br
+            
+            div.row
+                div.col-lg-5.col-xs-4.col-md-5
+                
+                div.col-lg-2.col-xs-3.col-md-2
+                    a(class="btn btn-warning" href="/actividad" role="button")
+                        img(src="", alt="")
+                div.col-lg-5.col-xs-4.col-md-5
+            
+            div.row
+                br
+                br
+
+            div.row
+                div.col-lg-6.col-xs-12.col-md-12
+                    h1="Descripcion"
+                    p=capituloInfo.descripcion
+                
+                div.col-lg-6.col-xs-12.col-md-12
+                    h1="Creditos"
+                    p=capituloInfo.creditos
+        
+
+    
+    
+
+  

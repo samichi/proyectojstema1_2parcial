@@ -10,7 +10,7 @@ html
                 div.col-lg-2.col-xs-12.col-md-6
                     form(action="/listacapituloporexcursion", method="get")
                         a(class="btn btn-success", role="button", href="/listacapituloporexcursion/"+excursion.id)
-                            img(class="img-thumbnail", src=excursion.urlimg, alt="", width="200px")
+                            img(class="img-thumbnail", src="../public/"+excursion.urlimg, alt="", width="200px")
                             h3=excursion.nombre
                 
                     

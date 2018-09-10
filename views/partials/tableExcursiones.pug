@@ -1,0 +1,64 @@
+button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addExcursion") AGREGAR EXCURSION
+table
+        tr  
+            th ID
+            th Nombre
+            th URL
+            th ACCIONES
+        for object in objectList
+            tr
+                td= object.id
+                td= object.nombre
+                td= object.urlimg
+                td
+                    button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editExcursion-"+object.id) EDITAR
+                td  
+                    button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteExcursion-"+object.id) ELIMINAR
+for object in objectList
+    div(class="modal fade" id="deleteExcursion-"+object.id role="dialog")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal")
+                    h4(class="modal-title") Eliminar Excursion
+                div(class="modal-body")
+                    p ESTO ELIMINARÁ LA EXCURSIÓN Y TODOS SUS CAPITULOS
+                div(class="modal-footer")
+                    button(onclick="deleteOne('excursion', '" + object.id + "')") ELIMINAR
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+div(class="modal fade" id="addExcursion" role="dialog")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                button(type="button" class="close" data-dismiss="modal")
+                h4(class="modal-title") Agregar Excursion
+            div(class="modal-body")
+                form(method='POST' action='/excursion')
+                    div.form-group
+                        label(for='name') Nombre
+                        input#name.form-control(type='text', placeholder='Nombre de la excursion' name='nombre')
+                    div.form-group
+                        label(for='email') URL:
+                        input#email.form-control(type='text', placeholder='/example.com' name='urlimg')
+                    button.btn.btn-primary(type='submit') Agregar
+            div(class="modal-footer")
+                button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+for object in objectList
+    div(class="modal fade" id="editExcursion-"+object.id role="dialog")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal")
+                    h4(class="modal-title") Agregar Excursion
+                div(class="modal-body")
+                    form(method='POST' action='/excursion/'+object.id)
+                        div.form-group
+                            label(for='name') Nombre
+                            input#name.form-control(type='text', placeholder='Nombre de la excursion' value=object.nombre name='nombre')
+                        div.form-group
+                            label(for='email') URL:
+                            input#email.form-control(type='text', placeholder='/example.com' value=object.urlimg name='urlimg')
+                        button.btn.btn-primary(type='submit') Actualizar
+                        a(href='/excursiones/'+ object.id +'/capitulo') Ver o agregar capitulos
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar

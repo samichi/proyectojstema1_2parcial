@@ -1,0 +1,70 @@
+button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addInfante") AGREGAR INFANTE
+table
+        tr  
+            th ID
+            th Nombre
+            th URL
+            th PUNTAJE
+        for object in objectList
+            tr
+                td= object.id
+                td= object.nombre
+                td= object.urlimagen
+                td= object.puntaje
+                td
+                    button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editExcursion-"+object.id) EDITAR
+                td
+                    button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteInfante-"+object.id) ELIMINAR
+for object in objectList
+    div(class="modal fade" id="deleteInfante-"+object.id role="dialog")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal")
+                    h4(class="modal-title") Eliminar Infante
+                div(class="modal-body")
+                    p ESTO ELIMINARÁ LA EXCURSIÓN Y TODOS SUS CAPITULOS
+                div(class="modal-footer")
+                    button(onclick="deleteOne('infante', '" + object.id + "')") ELIMINAR
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+div(class="modal fade" id="addInfante" role="dialog")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                button(type="button" class="close" data-dismiss="modal")
+                h4(class="modal-title") Agregar Infante
+            div(class="modal-body")
+                form(method='POST' action='/infante')
+                    div.form-group
+                        label(for='nombre') Nombre
+                        input#nombre.form-control(type='text', placeholder='Nombre del infante' name='nombre')
+                    div.form-group
+                        label(for='urlimagen') URL imagen:
+                        input#urlimagen.form-control(type='text', placeholder='/example.com' name='urlimagen')
+                    div.form-group
+                        label(for='puntaje') Puntaje:
+                        input#puntaje.form-control(type='text', placeholder='/example.com' name='puntaje')
+                    button.btn.btn-primary(type='submit') Agregar
+            div(class="modal-footer")
+                button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+for object in objectList
+    div(class="modal fade" id="editExcursion-"+object.id role="dialog")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal")
+                    h4(class="modal-title") Agregar Excursion
+                div(class="modal-body")
+                    form(method='POST' action='/infante/'+object.id)
+                        div.form-group
+                            label(for='nombre') Nombre
+                            input#nombre.form-control(type='text', placeholder='Nombre del infante' name='nombre')
+                        div.form-group
+                            label(for='urlimagen') URL imagen:
+                            input#urlimagen.form-control(type='text', placeholder='/example.com' name='urlimagen')
+                        div.form-group
+                            label(for='puntaje') Puntaje:
+                            input#puntaje.form-control(type='text', placeholder='/example.com' name='puntaje')
+                        button.btn.btn-primary(type='submit') Agregar
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
