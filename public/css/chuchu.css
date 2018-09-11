@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 #principal{
   background-image: url("../images/fondoJuego.png");
 }
@@ -9,10 +13,10 @@
 
 .center-block {
   float:none;
-}
+} 
 
 .headerimage{ background:#000; position:relative;}
-.btn-wrapper{ text-align:center; position:absolute; bottom: 100px; margin: 0 auto; width:100%;}
+.btn-wrapper{ text-align:center; position:absolute; bottom: 10%; margin: 0 auto; width:90%;}
 .img-responsive{
   width:100% !important;
   border-radius:0 0 5px 5px !important;
@@ -20,4 +24,53 @@
 
 .rounded-button{
   border-radius: 50%;
+}
+.h1{ 
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: bolder !important  ;
+}
+  
+/*////////////////////////////////////GALERIA3////////////////////////////////////*/
+div.gallery {
+  margin: 20px;
+  float: right;
+  width: 250px;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+h1{
+  text-align: center;
+}
+.h3m{
+  color: #d9534f;
+  text-align: center;
+  font-weight:bold;
+  font-family:Lucida Sans Unicode;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  
+}
+.centro {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+div.gallerys {
+  margin: 20px;
+  width: 250px;
+}
+
+div.gallerys img {
+  width: 100%;
+  height: auto;
 }

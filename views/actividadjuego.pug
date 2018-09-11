@@ -6,11 +6,10 @@ html
     body
         div.container
             div.row
-                div.col-lg-12.col-md-6.col-xs-12
-                    h1.h3m=capituloInfo.titulo
-                div.col-lg-12.col-xs-12.col-md-12
-                div.embed-responsive.embed-responsive-16by9
-                    iframe(class="embed-responsive-item", src=capituloInfo.urlvideo, allowfullscreen="true", allowscriptaccess="always", frameborder="0")            
+                div(class="container-fluid headerimage",style="padding:0 !important")
+                    div(class="col-lg-12 col-md-12 col-xs-12",style="padding:0 !important")
+                        img(src="../public/images/pantallaPrincipal.png", alt="placeholder 960", class="img-responsive")
+            
             div.row
                 br
             
@@ -28,15 +27,9 @@ html
 
             div.row
                 div.col-lg-6.col-xs-12.col-md-12
-                    h3.h3m="Descripción"
+                    h3="Descripción"
                     p=capituloInfo.descripcion
                 
                 div.col-lg-6.col-xs-12.col-md-12
-                    h3.h3m="Creditos"
+                    h3="Creditos"
                     p=capituloInfo.creditos
-        
-
-    
-    
-
-  

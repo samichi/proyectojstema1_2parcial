@@ -2,12 +2,13 @@ html
     head
         title="ChuChu TV Game"
         link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+        link(href='../public/css/chuchu.css', rel='stylesheet')
     body
         div.container
-        h1='Elije tu personaje'
-            div.row
+        h1.h3m='Elije tu personaje'
+            div
                 for infante in infanteList
-                    div.col-lg-2.col-xs-12.col-md-6
+                    div.gallery
                         form(action="/leerexcursionusuario", method="GET")
                             a(class="btn btn-success", role="button" ,href="/leerexcursionusuario/"+infante.id)
                                 img(class="img-thumbnail", src="../public/"+infante.urlimagen, alt="")
