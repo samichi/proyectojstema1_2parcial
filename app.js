@@ -13,6 +13,7 @@ var app = express();
 
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
+var busboyBodyParser = require('busboy-body-parser');
 
 const expressSession = require('express-session');
 app.use(expressSession({secret: 'mySecretKey'}));
@@ -28,6 +29,7 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(flash());
 app.use(session({secret: 'keyboard cat'}))
 app.use(bodyParser());
+app.use(busboyBodyParser());
 app.set('view engine', 'pug');
 app.set('view options', { layout: false });
 
