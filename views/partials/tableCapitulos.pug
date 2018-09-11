@@ -40,7 +40,7 @@ div(class="modal fade" id="addCapitulo" role="dialog")
                 button(type="button" class="close" data-dismiss="modal")
                 h4(class="modal-title") Agregar Excursion
             div(class="modal-body")
-                form(method='POST' action='/capitulo/'+id_excursion)
+                form(method='POST' enctype="multipart/form-data" action='/capitulo/'+id_excursion)
                     div.form-group
                         label(for='titulo') Titulo
                         input#titulo.form-control(type='text', placeholder='Titulo' name='titulo')
@@ -58,7 +58,7 @@ div(class="modal fade" id="addCapitulo" role="dialog")
                         input#urlvideo.form-control(type='text', placeholder='/example.com' name='urlvideo')
                     div.form-group
                         label(for='urlactividad') Url Actividad:
-                        input#urlactividad.form-control(type='text', placeholder='/example.com' name='urlactividad')
+                        input#urlactividad.form-control(type='file', placeholder='/example.com' name='urlactividad' accept="audio/*")
                     div.form-group
                         label(for='urlrespuesta') Url Respuesta:
                         input#urlrespuesta.form-control(type='text', placeholder='/example.com' name='urlrespuesta')
@@ -91,7 +91,7 @@ for object in objectList
                             input#urlvideo.form-control(type='text', placeholder='/example.com' name='urlvideo')
                         div.form-group
                             label(for='urlactividad') Url Actividad:
-                            input#urlactividad.form-control(type='text', placeholder='/example.com' name='urlactividad')
+                            input#urlactividad.form-control(type='file', placeholder='/example.com' name='urlactividad' accept="audio/*")
                         div.form-group
                             label(for='urlrespuesta') Url Respuesta:
                             input#urlrespuesta.form-control(type='text', placeholder='/example.com' name='urlrespuesta')
