@@ -11,7 +11,7 @@ html
                     div.gallery
                         form(action="/leerexcursionusuario", method="GET")
                             a(class="btn btn-success", role="button" ,href="/leerexcursionusuario/"+infante.id)
-                                img(class="img-thumbnail", src="../public/"+infante.urlimagen, alt="")
+                                img(class="img-thumbnail", src=infante.urlimagen, alt="")
                                 h3=infante.nombre
             
 

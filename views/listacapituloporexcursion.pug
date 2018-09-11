@@ -11,5 +11,5 @@ html
                 div.gallery
                     form(action="/infocapituloporid", method="get")
                         a(class="btn btn-success", role="button", href="/infocapituloporid/"+capExc.id)
-                            img(class="../public/"+"img-thumbnail", src="../public/"+capExc.imgcapitulo, alt="", width="200px")
+                            img(class="img-thumbnail", src=capExc.imgcapitulo, alt="", width="200px")
                             h4=capExc.titulo
